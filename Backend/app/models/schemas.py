@@ -8,3 +8,6 @@ class IdentificationResponse(BaseModel):
 class ErrorResponse(BaseModel):
     detail: str 
     
+    
+class TranslationResponse(BaseModel):
+    text: str

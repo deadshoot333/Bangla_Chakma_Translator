@@ -3,6 +3,7 @@ from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware 
 
 from app.api.routes.identify import router as identify_router
+from app.api.routes.translate import router as translate_router
 
 logger = logging.getLogger(__name__)
 
@@ -25,3 +26,4 @@ def home():
     return "Welcome to Chakma Translator"
 
 app.include_router(identify_router, tags=["Inference"])
+app.include_router(translate_router,tags=["Inference"])
