@@ -1,8 +1,7 @@
 import logging 
 
 from fastapi import APIRouter, status, HTTPException
-from pydantic import Field
-from app.models.schemas import ErrorResponse, TranslationResponse
+from app.models.schemas import ErrorResponse, TextRequest, TranslationResponse
 from app.services.inference import translation_service_ban2chak
 
 logger = logging.getLogger(__name__)
@@ -18,9 +17,9 @@ router = APIRouter()
     summary = "Translate Bangla to Chakma",
 )
 
-async def translate_language(text:str):
+async def translate_language(request: TextRequest):
     try: 
-        response = translation_service_ban2chak.Bangla2Chakma(text) 
+        response = translation_service_ban2chak.Bangla2Chakma(request.text) 
     except Exception as exc: 
         logger.exception("Inference failed")
         raise HTTPException(

@@ -1,4 +1,8 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
+
+class TextRequest(BaseModel):
+    text: str
+
 
 class IdentificationResponse(BaseModel):
     text: str 

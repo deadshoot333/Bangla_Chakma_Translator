@@ -2,7 +2,7 @@ import logging
 
 from fastapi import APIRouter, status, HTTPException
 
-from app.models.schemas import ErrorResponse, IdentificationResponse
+from app.models.schemas import ErrorResponse, IdentificationResponse, TextRequest
 from app.services.inference import identification_service
 
 logger = logging.getLogger(__name__)
@@ -18,9 +18,9 @@ router = APIRouter()
     summary = "Identify Bangla-Chakma text",
 )
 
-async def identify_language(text:str):
+async def identify_language(request: TextRequest):
     try: 
-        response = identification_service.identify(text) 
+        response = identification_service.identify(request.text) 
     except Exception as exc: 
         logger.exception("Inference failed")
         raise HTTPException(
